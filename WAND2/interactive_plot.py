@@ -36,8 +36,8 @@ if lst != []:
     data = np.array(lst)
     theta, z, intensity, h, k, l, mu, omega, chi, phi, gamma, delta = data[:,0], data[:,1], data[:,2], data[:,3], data[:,4], data[:,5], data[:,6], data[:,7], data[:,8], data[:,9], data[:,10], data[:,11]
     data_dict =  {'theta': theta, 'z': z, 'intensity':intensity, 'h': h, 'k':k, 'l':l, 'mu':mu, 'omega':omega, 'chi':chi, 'phi':phi, 'gamma':gamma, 'delta':delta}
-    df = pd.DataFrame(data_dict)
-    df.to_csv('refls.csv')
+    #df = pd.DataFrame(data_dict)
+    #df.to_csv('refls.csv')
 else:
     print("NO DATA")
 
@@ -90,7 +90,7 @@ heatmap_im = ax.imshow(heatmap_window,
             origin='lower', aspect='auto', cmap='viridis', vmin=0, vmax=1)
 
 plt.colorbar(heatmap_im, ax=ax, label="Normalized Intensity")
-ax.set_xlabel("theta (degrees)")
+ax.set_xlabel("theta (°)")
 ax.set_ylabel("z")
 
 axcolor = 'lightgoldenrodyellow'

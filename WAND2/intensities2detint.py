@@ -49,7 +49,7 @@ def intensities2detint(cif_path, hkl_path, wavelength, min_intensity, R, cyl_cen
     # add columns for real axes motor positions to reflection df
     df2 = dfhkl2dfhklaxes(df, min_intensity, factory, geometry, detector, sample, user)
     theta, z, intensities = [], [], []
-    df2.to_csv('refls2.csv')
+    #df2.to_csv('refls2.csv')
     for idx, refl in df2.iterrows():
         mu = refl['mu']
         omega = refl['omega']

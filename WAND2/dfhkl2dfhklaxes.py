@@ -1,8 +1,13 @@
 import numpy as np
 import pandas as pd
 #from tqdm import tqdm
+import logging
+
+logger = logging.getLogger(__name__)
 
 def dfhkl2dfhklaxes(df, min_intensity, factory, geometry, detector, sample, user):
+    logger.info("Starting dfhkl2dfhklaxes with %d reflections", len(df))
+    rows = []
     new_df = pd.DataFrame(columns=['h', 'k', 'l', 'mu', 'omega', 'chi', 'phi', 'gamma','delta', 'd', 'intensity']) 
     engines = factory.create_new_engine_list()
     engines.init(geometry, detector, sample)
@@ -34,22 +39,29 @@ def dfhkl2dfhklaxes(df, min_intensity, factory, geometry, detector, sample, user
                 for i, item in enumerate(solutions.items()):
                     read = item.geometry_get().axis_values_get(user)
                     if read is not None:
-                        new_row = pd.DataFrame([{'h':h, \
-                                                'k':k, \
-                                                'l':l, \
-                                                'd':4.5, \
-                                                'intensity':inten, \
-                                                'mu':read[0], \
-                                                'omega':read[1], \
-                                                'chi':read[2], \
-                                                'phi':read[3], \
-                                                'gamma':read[4], \
-                                                'delta':read[5]}])
-                        if new_row is not None:
-                            new_df = pd.concat([new_df, new_row], ignore_index=True)
-                            found += 1
+                        rows.append({'h':h, \
+                                     'k':k, \
+                                     'l':l, \
+                                     'd':d, \
+                                     'intensity':inten, \
+                                     'mu':read[0], \
+                                     'omega':read[1], \
+                                     'chi':read[2], \
+                                     'phi':read[3], \
+                                     'gamma':read[4], \
+                                     'delta':read[5]})
+                        found += 1
             except Exception as e:
+                #logger.exception(f"Exception for hkl=({h},{k},{l}): {e}")
+                logger.info(f"Exception for hkl=({h},{k},{l}): {e}")
                 not_found += 1
-                print(e)
-    print(f"found motor positions for {found} reflections. Did not find for {not_found} reflections.")
-    return new_df
+                #print(e)
+    new_df = pd.DataFrame(rows, columns=['h', 'k', 'l', 'mu', 'omega', 'chi', 'phi', 'gamma', 'delta', 'd', 'intensity'])
+    foundrefl = num_refl-not_found
+    print(f"found {found} motor positions in {foundrefl} reflections. Did not find positions for {not_found} reflections.")
+    logger.info("Completed dfhkl2dfhklaxes. Output DataFrame has %d rows", len(new_df))
+    if new_df is not None:
+        return new_df
+    else:
+        print("empty dataframe, something went wrong")
+        return

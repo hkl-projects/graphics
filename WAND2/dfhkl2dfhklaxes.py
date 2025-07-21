@@ -26,12 +26,12 @@ def dfhkl2dfhklaxes(df, min_intensity, factory, geometry, detector, sample, user
     found = 0
     not_found = 0
     #for idx, refl in tqdm(df.iterrows(), total=num_refl, desc=Reflections):
-    for idx, refl in df.iterrows():
-        h = refl['h']
-        k = refl['k']
-        l = refl['l']
-        d = refl['d']
-        inten = refl['intensity']
+    for refl in df.itertuples(index=False):
+        h = refl.h
+        k = refl.k
+        l = refl.l
+        d = refl.d
+        inten = refl.intensity
         if inten > min_intensity:
             try:
                 solutions = engine_hkl.pseudo_axis_values_set([h,k,l], user)
@@ -55,7 +55,6 @@ def dfhkl2dfhklaxes(df, min_intensity, factory, geometry, detector, sample, user
                 #logger.exception(f"Exception for hkl=({h},{k},{l}): {e}")
                 logger.info(f"Exception for hkl=({h},{k},{l}): {e}")
                 not_found += 1
-                #print(e)
     new_df = pd.DataFrame(rows, columns=['h', 'k', 'l', 'mu', 'omega', 'chi', 'phi', 'gamma', 'delta', 'd', 'intensity'])
     foundrefl = num_refl-not_found
     print(f"found {found} motor positions in {foundrefl} reflections. Did not find positions for {not_found} reflections.")

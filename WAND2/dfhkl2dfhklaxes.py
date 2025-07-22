@@ -1,6 +1,6 @@
 import numpy as np
 import pandas as pd
-#from tqdm import tqdm
+from tqdm import tqdm
 import logging
 
 logger = logging.getLogger(__name__)
@@ -26,7 +26,7 @@ def dfhkl2dfhklaxes(df, min_intensity, factory, geometry, detector, sample, user
     found = 0
     not_found = 0
     #for idx, refl in tqdm(df.iterrows(), total=num_refl, desc=Reflections):
-    for refl in df.itertuples(index=False):
+    for refl in tqdm(df.itertuples(index=False), total=num_refl):
         h = refl.h
         k = refl.k
         l = refl.l

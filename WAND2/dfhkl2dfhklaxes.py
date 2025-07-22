@@ -21,40 +21,42 @@ def dfhkl2dfhklaxes(df, min_intensity, factory, geometry, detector, sample, user
     #    if (axis=='chi'):
     #        tmp.min_max_set(-0.01, 0.01, user)
     #        geometry.axis_set(axis, tmp)
-    num_refl = len(df)
-    print(f"Searching through {num_refl} reflections...")
     found = 0
     not_found = 0
-    #for idx, refl in tqdm(df.iterrows(), total=num_refl, desc=Reflections):
+    total_num_refl = len(df)
+    df = df[df['intensity']>min_intensity]
+    num_refl = len(df)
+    print(f'total reflections: {total_num_refl}\nreflections filtered by intensity: {num_refl}')
+    print(f"Searching through {num_refl} reflections...")
     for refl in tqdm(df.itertuples(index=False), total=num_refl):
         h = refl.h
         k = refl.k
         l = refl.l
         d = refl.d
         inten = refl.intensity
-        if inten > min_intensity:
-            try:
-                solutions = engine_hkl.pseudo_axis_values_set([h,k,l], user)
-                # similar to apply_axes_solns in hkl.py
-                for i, item in enumerate(solutions.items()):
-                    read = item.geometry_get().axis_values_get(user)
-                    if read is not None:
-                        rows.append({'h':h, \
-                                     'k':k, \
-                                     'l':l, \
-                                     'd':d, \
-                                     'intensity':inten, \
-                                     'mu':read[0], \
-                                     'omega':read[1], \
-                                     'chi':read[2], \
-                                     'phi':read[3], \
-                                     'gamma':read[4], \
-                                     'delta':read[5]})
-                        found += 1
-            except Exception as e:
-                #logger.exception(f"Exception for hkl=({h},{k},{l}): {e}")
-                logger.info(f"Exception for hkl=({h},{k},{l}): {e}")
-                not_found += 1
+        #if inten > min_intensity:
+        try:
+            solutions = engine_hkl.pseudo_axis_values_set([h,k,l], user)
+            # similar to apply_axes_solns in hkl.py
+            for i, item in enumerate(solutions.items()):
+                read = item.geometry_get().axis_values_get(user)
+                if read is not None:
+                    rows.append({'h':h, \
+                                 'k':k, \
+                                 'l':l, \
+                                 'd':d, \
+                                 'intensity':inten, \
+                                 'mu':read[0], \
+                                 'omega':read[1], \
+                                 'chi':read[2], \
+                                 'phi':read[3], \
+                                 'gamma':read[4], \
+                                 'delta':read[5]})
+                    found += 1
+        except Exception as e:
+            #logger.exception(f"Exception for hkl=({h},{k},{l}): {e}")
+            logger.info(f"Exception for hkl=({h},{k},{l}): {e}")
+            not_found += 1
     new_df = pd.DataFrame(rows, columns=['h', 'k', 'l', 'mu', 'omega', 'chi', 'phi', 'gamma', 'delta', 'd', 'intensity'])
     foundrefl = num_refl-not_found
     print(f"found {found} motor positions in {foundrefl} reflections. Did not find positions for {not_found} reflections.")

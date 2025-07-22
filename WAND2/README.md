@@ -14,5 +14,5 @@ export GI_TYPELIB_PATH=/usr/local/lib/girepository-1.0
 
 run the gui
 ```bash
-python3 interactive_plot.py
+python interactive_plot.py
 ```

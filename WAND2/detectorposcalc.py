@@ -41,16 +41,11 @@ def cylinder_intersection(ray_origin, ray_dir, R, cyl_center=(0,0)):
     return ray_origin + t * ray_dir
 
 def real2det(gamma_axis, delta_axis, s_gamma, s_delta, R, cyl_center, ray_origin):
-    # Rotation axes
-    #gamma_axis   = (0, 0, 1)
-    #delta_axis = (0, -1, 0)
-
     ray_dir_0 = np.array([1.0, 0.0, 0.0])
     x_c, y_c = cyl_center
 
     gamma = np.deg2rad(s_gamma)
     delta = np.deg2rad(s_delta)
-
     R_gamma = rotation_matrix(gamma_axis, gamma)
     R_delta = rotation_matrix(delta_axis, delta)
 
@@ -67,7 +62,6 @@ def real2det(gamma_axis, delta_axis, s_gamma, s_delta, R, cyl_center, ray_origin
         theta_rad = np.arctan2(y_hit - y_c, x_hit - x_c)
         if theta_rad < 0:
             theta_rad += 2*np.pi
-
         theta_deg = np.degrees(theta_rad)
 
         # return unfolded (theta_deg, z)

@@ -13,7 +13,8 @@ def dfhkl2dfhklaxes(df, min_intensity, factory, geometry, detector, sample, user
     engines.init(geometry, detector, sample)
     engines.get()
     engine_hkl = engines.engine_get_by_name("hkl")
-    engine_hkl.current_mode_set('lifting_detector_mu') # TODO CHECK THIS
+    #engine_hkl.current_mode_set('lifting_detector_mu') # TODO CHECK THIS
+    engine_hkl.current_mode_set('lifting_detector_omega') # TODO CHECK THIS
     #axes = geometry.axis_names_get()
     #for axis in axes:
     #    tmp = geometry.axis_get(axis)
@@ -34,7 +35,6 @@ def dfhkl2dfhklaxes(df, min_intensity, factory, geometry, detector, sample, user
         l = refl.l
         d = refl.d
         inten = refl.intensity
-        #if inten > min_intensity:
         try:
             solutions = engine_hkl.pseudo_axis_values_set([h,k,l], user)
             # similar to apply_axes_solns in hkl.py

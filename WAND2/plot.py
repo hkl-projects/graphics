@@ -5,15 +5,15 @@ import matplotlib.pyplot as plt
 from scipy.ndimage import gaussian_filter
 from intensities2detint import intensities2detint
 
-cif_path = '/epics/crystals/SiO2/EntryWithCollCode176.cif'
-hkl_path = '/epics/crystals/SiO2/EntryWithCollCode176.hkl'
+cif_path = '/epics/crystals/ErRu2Si2/EntryWithCollCode55782.cif'
+hkl_path = '/epics/crystals/ErRu2Si2/EntryWithCollCode55782.hkl'
 
 R = 0.7  # m
 wavelength = 1.486  # A
 width = 120  # degree
 cyl_center = (0,0)
 ray_origin = np.array([0.0, 0.0, 0.0])
-min_intensity = 100
+min_intensity = 1
 
 angle_deg = 7.5
 angle_rad = np.deg2rad(angle_deg)

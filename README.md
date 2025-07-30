@@ -2,7 +2,7 @@
 
 install the venv environment
 ```bash
-sudo apt install python3-venv
+sudo apt install gfortran python3-venv
 python3 -m venv --system-site-packages hklplots
 source hklplots/bin/activate
 pip install -r requirements.txt

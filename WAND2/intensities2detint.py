@@ -13,15 +13,17 @@ from detectorposcalc import real2det_e4c, real2det_e6c
 from mpl_toolkits.mplot3d import Axes3D
 import matplotlib.pyplot as plt
 import subprocess
-
+import os.path
 
 def intensities2detint_e4c(cif_path, hkl_path, wavelength, min_intensity, R, geom, cyl_center, ray_origin, zmin, zmax, tth_axis):
     lst = []
-    #generate hkl file with given cif file, wavelength
-    cif2hkl_bin = '/usr/bin/cif2hkl'
-    cmd = [cif2hkl_bin, '--mode', 'NUC', '--out', hkl_path, '--lambda', str(wavelength), '--xtal', cif_path]
-    proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-    out, err = proc.communicate()
+
+    if not os.path.isfile(hkl_path):
+        #generate hkl file with given cif file, wavelength
+        cif2hkl_bin = '/usr/bin/cif2hkl'
+        cmd = [cif2hkl_bin, '--mode', 'NUC', '--out', hkl_path, '--lambda', str(wavelength), '--xtal', cif_path]
+        proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        out, err = proc.communicate()
 
     # go from hkl file output by cif2hkl to a dataframe of reflections/intensities
     latt, df = hkl2dfhkl(hkl_path)
@@ -75,11 +77,12 @@ def intensities2detint_e4c(cif_path, hkl_path, wavelength, min_intensity, R, geo
 
 def intensities2detint_e6c(cif_path, hkl_path, wavelength, min_intensity, R, geom, cyl_center, ray_origin, zmin, zmax, gamma_axis, delta_axis):
     lst = []
-    #generate hkl file with given cif file, wavelength
-    cif2hkl_bin = '/usr/bin/cif2hkl'
-    cmd = [cif2hkl_bin, '--mode', 'NUC', '--out', hkl_path, '--lambda', str(wavelength), '--xtal', cif_path]
-    proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-    out, err = proc.communicate()
+    if not os.path.isfile(hkl_path):
+        #generate hkl file with given cif file, wavelength
+        cif2hkl_bin = '/usr/bin/cif2hkl'
+        cmd = [cif2hkl_bin, '--mode', 'NUC', '--out', hkl_path, '--lambda', str(wavelength), '--xtal', cif_path]
+        proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        out, err = proc.communicate()
 
     # go from hkl file output by cif2hkl to a dataframe of reflections/intensities
     latt, df = hkl2dfhkl(hkl_path)

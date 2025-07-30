@@ -1,0 +1,51 @@
+# TITLE  Er2 Ru4 Si4 [Tetragonal, Centric (-1 at origin)]
+#        a         b         c       alpha     beta      gamma
+# CELL    4.13700   4.13700   9.48300  90.00000  90.00000  90.00000
+# SPCGRP  I 4/m m m [Number  139]
+#                    X         Y         Z         B         Occ       Spin      Charge
+# Atom  Er1                    0.00000   0.00000   0.00000   0.00000   0.06250   0.00000   0.00000
+# Atom  Ru1                    0.00000   0.50000   0.25000   0.00000   0.12500   0.00000   0.00000
+# Atom  Si1                    0.00000   0.00000   0.36030   0.00000   0.12500   0.00000   0.00000
+# COMMAND cif2hkl /epics/crystals/ErRu2Si2/EntryWithCollCode55782.cif --output /epics/crystals/ErRu2Si2/EntryWithCollCode55782.hkl
+# CIF2HKL (c) Synchrotron Soleil, based on CrysFML
+# DATE    29/07/2025 at 14:43:21
+#
+# Physical parameters:
+# sigma_coh        48.74603 coherent   scattering cross section in [barn]
+# sigma_inc         3.81600 incoherent scattering cross section in [barn]
+# sigma_abs       328.92398 absorption scattering cross section in [barn]
+# density           8.70830 in [g/cm^3]
+# weight          851.13995 in [g/mol]
+# Vc              162.29935 volume of unit cell in [A^3]
+# lattice_a         4.13700 lattice parameter a in [Angs]
+# lattice_b         4.13700 lattice parameter b in [Angs]
+# lattice_c         9.48300 lattice parameter c in [Angs]
+# lattice_aa       90.00000 lattice angle alpha in [deg]
+# lattice_bb       90.00000 lattice angle beta in [deg]
+# lattice_cc       90.00000 lattice angle gamma in [deg]
+# STRUCTURE FACTORS(NEUTRONS)
+#
+# Format parameters: Crystallographica format
+# column_h  1
+# column_k  2
+# column_l  3
+# column_j  4   multiplicity 'j'
+# column_d  5   d-spacing 'd' in [Angs]
+# column_F2 6   norm of scattering factor |F|^2 in [barn]
+#
+# List    14 reflections for lambda >     5.4310 [Angs], decreasing d-spacing.
+# H   K   L     Mult    dspc                   |Fc|^2
+   0    0    2     2       4.74150      0.24299521E+01
+   0    0   -2     2       4.74150      0.24299521E+01
+  -1    0   -1     8       3.79188      0.24772781E+00
+   0   -1   -1     8       3.79188      0.24772781E+00
+   0    1   -1     8       3.79188      0.24772781E+00
+   1    0   -1     8       3.79188      0.24772781E+00
+   0   -1    1     8       3.79188      0.24772781E+00
+   1    0    1     8       3.79188      0.24772781E+00
+  -1    0    1     8       3.79188      0.24772781E+00
+   0    1    1     8       3.79188      0.24772781E+00
+  -1   -1    0     4       2.92530      0.16451132E+00
+   1   -1    0     4       2.92530      0.16451132E+00
+  -1    1    0     4       2.92530      0.16451132E+00
+   1    1    0     4       2.92530      0.16451132E+00

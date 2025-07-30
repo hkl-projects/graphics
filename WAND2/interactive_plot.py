@@ -4,9 +4,8 @@ from matplotlib.widgets import Slider, TextBox
 from scipy.ndimage import gaussian_filter
 from intensities2detint import intensities2detint_e4c, intensities2detint_e6c
 
-cif_path = '/epics/crystals/ErRu2Si2/EntryWithCollCode55782.cif'
-hkl_path = '/epics/crystals/ErRu2Si2/EntryWithCollCode55782.hkl'
-print(f'cif_path: {cif_path}\nhkl_path: {hkl_path}')
+cif_path = '../samples/ErRu2Si2/EntryWithCollCode55782.cif'
+hkl_path = '../samples/ErRu2Si2/EntryWithCollCode55782.hkl'
 
 
 gauss_sig = 3

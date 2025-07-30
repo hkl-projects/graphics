@@ -20,6 +20,6 @@ python interactive_plot.py
 
 ### Automated
 ```
-./install_env.sh
+source install.sh
 ./run.sh
 ```

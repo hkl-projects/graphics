@@ -8,3 +8,6 @@ git clone https://gitlab.com/soleil-data-treatment/soleil-software-projects/cif2
 cd cif2hkl
 make
 sudo make install
+
+cd -
+source hklplots/bin/activate
